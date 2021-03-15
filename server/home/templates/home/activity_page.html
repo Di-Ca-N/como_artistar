@@ -28,9 +28,11 @@
                                         <div class="card-body">
                                             {{comment.text|richtext}}
                                         </div>
-                                        <div class="card-footer">
-                                            <span>{{comment.user}}</span>
-                                        </div>
+                                        {% if comment.user %}
+                                            <div class="card-footer">
+                                                <span>{{comment.user}}</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                                 <div class="add-post">
