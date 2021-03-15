@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags%}
+
+
+{% block content %}
+    <main class="page lanidng-page">
+        <section class="portfolio-block block-intro" style="padding: 0px 0px;">
+            <div data-bss-parallax-bg="true" style="height: 500px;background-image: url(https://unsplash.it/1800/900?image=1051);background-position: center;background-size: cover;"></div>
+            <section class="article-list">
+                <div class="container">
+                    <div class="intro">
+                        <h2 class="text-center">Latest Articles</h2>
+                        <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+                    </div>
+                    <div class="row articles">
+                        {% for course_page in page.get_children %}
+                            <div class="col-sm-6 col-md-4 item"><a href="{{course_page.url}}">{% image course_page.specific.cover_image fill-800x400 class="img-fluid"%}
+                                <h3 class="name">{{course_page.title}}</h3>
+                                <p class="description">{{course_page.specific.description|richtext}}</p><a class="action" href="{{course_page.url}}"><i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </section>
+            <div class="container">
+                <div class="about-me"></div>
+            </div>
+        </section>
+    </main>
+    
+{% endblock content %}
+
+

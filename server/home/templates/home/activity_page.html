@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags crispy_forms_tags%}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'assets/css/activity_page.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <main class="page">
+        <section class="article-clean">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                        <div class="intro">
+                            <h1 class="text-center">{{page.title}}</h1>
+                            {% image page.specific.cover_image fill-800x400 class="img-fluid"%}
+                        </div>
+                        {% for resource in page.specific.resources.all %}
+                            <div class="text">
+                                {% include_block resource.content %}
+                            </div>
+                        {% endfor %}
+                        {% for comment in page.specific.comments.all %}
+                            <div class="text card my-2">
+                                <div class="card-body">
+                                    {{comment.text|richtext}}
+                                </div>
+                                <div class="card-footer">
+                                    <span>{{comment.user}}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="add-post">
+                            <form method="POST">
+                                <div class="row">
+                                    {% csrf_token %}
+                                    {{form|crispy}}
+                                    {{form.media.js}}
+                                    {{form.media.css}}
+                                </div>
+                                <div class="row my-3">
+                                    <button class="btn btn-primary">Enviar</button>
+                                    <a class="btn btn-danger" id="cancel-post">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                        <button class="btn btn-primary" id="add-post-button">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'assets/js/add-post.js'%}"></script>
+{% endblock extra_js %}
