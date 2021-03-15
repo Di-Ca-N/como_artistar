@@ -54,7 +54,8 @@ class ActivityPage(Page):
             if form.is_valid():
                 post = form.save(commit=False)
                 post.page = self
-                post.user = request.user
+                if request.user.is_authenticated:
+                    post.user = request.user
                 post.save()
                 messages.success(request, "Sucesso!")
         else:
