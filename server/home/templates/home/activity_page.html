@@ -7,7 +7,7 @@
 
 {% block content %}
     <main class="page">
-        <section class="article-clean">
+        <section class="article-clean portfolio-block">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
@@ -20,31 +20,36 @@
                                 {% include_block resource.content %}
                             </div>
                         {% endfor %}
-                        {% for comment in page.specific.comments.all %}
-                            <div class="text card my-2">
-                                <div class="card-body">
-                                    {{comment.text|richtext}}
+                        <div class="row">
+                            <div class="col">
+                                <h2>Compartilhe o que achou com a gente!</h2>
+                                {% for comment in page.specific.comments.all %}
+                                    <div class="text card my-2">
+                                        <div class="card-body">
+                                            {{comment.text|richtext}}
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>{{comment.user}}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="add-post">
+                                    <form method="POST">
+                                        <div class="row">
+                                            {% csrf_token %}
+                                            {{form|crispy}}
+                                            {{form.media.js}}
+                                            {{form.media.css}}
+                                        </div>
+                                        <div class="row my-3">
+                                            <button class="btn btn-primary">Enviar</button>
+                                            <a class="btn btn-danger" id="cancel-post">Cancelar</a>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="card-footer">
-                                    <span>{{comment.user}}</span>
-                                </div>
+                                <button class="btn btn-primary" id="add-post-button">Adicionar</button>
                             </div>
-                        {% endfor %}
-                        <div class="add-post">
-                            <form method="POST">
-                                <div class="row">
-                                    {% csrf_token %}
-                                    {{form|crispy}}
-                                    {{form.media.js}}
-                                    {{form.media.css}}
-                                </div>
-                                <div class="row my-3">
-                                    <button class="btn btn-primary">Enviar</button>
-                                    <a class="btn btn-danger" id="cancel-post">Cancelar</a>
-                                </div>
-                            </form>
                         </div>
-                        <button class="btn btn-primary" id="add-post-button">Adicionar</button>
                     </div>
                 </div>
             </div>
