@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     <main class="page project-page">
@@ -8,7 +8,8 @@
                 <div class="heading">
                     <h2>{{page.title}}</h2>
                 </div>
-                <div class="image" style="background-image:url(&quot;{%static 'assets/img/tech/image4.jpg' %}&quot;);"></div>
+                {% image page.specific.cover_image fill-1110x450 as my_image%}
+                <div class="image" style="background-image:url({{my_image.url}});"></div>
                 <div class="row">
                     <div class="col-auto col-md-6 offset-md-1 info">
                         <h3>Descrição</h3>
