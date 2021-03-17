@@ -18,7 +18,7 @@
                         {% for resource in page.specific.resources.all %}
                             <div class="text">
                                 {% for block in resource.content %}
-                                    {% if block.block_type =='embed'%}
+                                    {% if block.block_type == 'embed'%}
                                         <div class="embed-responsive embed-responsive-16by9">
                                             {{ block.value }}
                                         </div>
