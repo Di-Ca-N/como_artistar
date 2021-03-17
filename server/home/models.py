@@ -20,8 +20,32 @@ from tinymce.models import HTMLField
 
 
 class HomePage(Page):
-    pass
+    section_title = models.CharField(max_length=60)
+    text = models.TextField()
 
+    content_panels = Page.content_panels + [
+        FieldPanel('section_title'),
+        FieldPanel('text')
+    ]
+    
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["courses"] = CoursePage.objects.all()
+        context["active_page"] = "home"
+        return context
+
+
+class AboutPage(Page):
+    content = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('content')
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["active_page"] = "about"
+        return context
 
 class CoursePage(Page):
     description = RichTextField()
@@ -58,6 +82,7 @@ class ActivityPage(Page):
                     post.user = request.user
                 post.save()
                 messages.success(request, "Sucesso!")
+                form = PostForm()
         else:
             form = PostForm()
 

@@ -9,11 +9,11 @@
             <section class="article-list">
                 <div class="container">
                     <div class="intro">
-                        <h2 class="text-center">Latest Articles</h2>
-                        <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+                        <h2 class="text-center">{{page.specific.section_title}}</h2>
+                        <p class="text-center">{{page.specific.text}}</p>
                     </div>
                     <div class="row articles">
-                        {% for course_page in page.get_children %}
+                        {% for course_page in courses %}
                             <div class="col-sm-6 col-md-4 item"><a href="{{course_page.url}}">{% image course_page.specific.cover_image fill-800x400 class="img-fluid"%}
                                 <h3 class="name">{{course_page.title}}</h3>
                                 <p class="description">{{course_page.specific.description|richtext}}</p><a class="action" href="{{course_page.url}}"><i class="fa fa-arrow-circle-right"></i></a>
