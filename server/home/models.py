@@ -96,7 +96,6 @@ class Resource(Orderable):
         ("paragraph", blocks.RichTextBlock()),
         ("embed", EmbedBlock()),
         ("image", ImageChooserBlock()),
-        ("video", VideoChooserBlock()),
         ("document", DocumentChooserBlock()),
     ])
 
