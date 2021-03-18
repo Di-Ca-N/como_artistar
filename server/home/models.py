@@ -20,10 +20,14 @@ from tinymce.models import HTMLField
 
 
 class HomePage(Page):
+    cover_image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.SET_NULL, null=True, related_name='+'
+    )
     section_title = models.CharField(max_length=60)
     text = models.TextField()
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('cover_image'),
         FieldPanel('section_title'),
         FieldPanel('text')
     ]

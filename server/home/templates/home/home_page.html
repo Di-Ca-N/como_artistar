@@ -5,7 +5,8 @@
 {% block content %}
     <main class="page lanidng-page">
         <section class="portfolio-block block-intro" style="padding: 0px 0px;">
-            <div data-bss-parallax-bg="true" style="height: 500px;background-image: url(https://unsplash.it/1800/900?image=1051);background-position: center;background-size: cover;"></div>
+            {% image page.specific.cover_image fill-1800x900 as home_cover_image%}
+            <div data-bss-parallax-bg="true" style="height: 500px;background-image: url({{home_cover_image}});background-position: center;background-size: cover;"></div>
             <section class="article-list">
                 <div class="container">
                     <div class="intro">
